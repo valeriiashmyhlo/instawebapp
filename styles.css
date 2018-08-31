@@ -1,0 +1,11 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+p {
+  margin-bottom: 0;
+}
+.logo-img {
+  width: 100%;
+  background-size: contain;
+  background-position: center;
+}
