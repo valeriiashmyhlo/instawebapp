@@ -6,13 +6,13 @@ import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'r
 import gql from 'graphql-tag';
 import { addComment } from '../../features/posts/actions';
 
-const QUERY = ({ name, comment }) => gql`
-  query Mutation($name: ${name}! $text: ${comment}!) {
-    createComment(
-      name: $name
-      text: $text
-    ) {
-      name
+const QUERY = ({ author, text }) => gql`
+  mutation {
+    createComment(input: {
+      author: "${author}"
+      text: "${text}"
+    }) {
+      author
       text
     }
   } 
@@ -20,8 +20,9 @@ const QUERY = ({ name, comment }) => gql`
 
 type Props = {
   handleSubmit: (values) => ({}),
-  addComment: (values) => (Promise<object>),
-  reset: boolean
+  addComment: (values, postId) => (Promise<object>),
+  reset: () => {}, 
+  postId: string
 }
 
 const InputField = ({
@@ -31,32 +32,33 @@ const InputField = ({
   placeholder,
   meta: { touched, error }
 }) => (
-  <div>
-    <Input
-      {...input}
-      type={type}
-      name={name}
-      placeholder={placeholder}
-      invalid={!!(touched && error)}
-    />
-    <FormFeedback>{error}</FormFeedback>
-  </div>
-);
+    <div>
+      <Input
+        {...input}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        invalid={!!(touched && error)}
+      />
+      <FormFeedback>{error}</FormFeedback>
+    </div>
+  );
 
 class AddCommentForm extends React.Component<Props> {
   submit(values) {
-    return this.props.addComment({query: QUERY, author: "Alex", comment: values.comment})
-      // .then(this.props.reset);
+    const query = QUERY({ author: "Alex", text: values.comment });
+    return this.props.addComment(query, this.props.postId)
+    .then(this.props.reset);
   }
   render() {
-    const { handleSubmit, /*submitting, invalid, reset, pristine*/ } = this.props;
+    const { handleSubmit } = this.props;
 
     return (
       <Form onSubmit={handleSubmit((values) => this.submit(values))}>
-        <Field 
-          type="text" 
-          name="comment" 
-          placeholder="Add a comment..." 
+        <Field
+          type="text"
+          name="comment"
+          placeholder="Add a comment..."
           component={InputField} />
       </Form>
     )
@@ -67,4 +69,4 @@ class AddCommentForm extends React.Component<Props> {
 
 export default connect(null, { addComment })(reduxForm({
   form: "AddCommentForm"
-},)(AddCommentForm));
+}, )(AddCommentForm));

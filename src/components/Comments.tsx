@@ -20,19 +20,19 @@ const Text = styled.span`
   vertical-align: baseline;
 `;
 
-const Comments = ({ comments }) => {
+const Comments = ({ postId, comments }) => {
   return (
     <div>
       <div style={{ marginBottom: "20px" }}>
-        {comments ? comments.map(({name, text}, i) => (
+        {comments ? comments.map(({ author, text }, i) => (
           <Comment key={i}>
-            <Name href="#">{name}</Name>
+            <Name href="#">{author}</Name>
             <Text>{text}</Text>
           </Comment>
         )) : null}
       </div>
 
-      <AddCommentForm />
+      <AddCommentForm postId={postId} form={`AddCommentForm${postId}`} />
     </div>
   )
 }

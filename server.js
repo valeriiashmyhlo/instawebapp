@@ -4,8 +4,46 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 // const actions = require('./actions');
 
+const POSTS = [
+  {
+    id: '5',
+    name: 'Nina',
+    location: 'Kiyv',
+    logoImg: 'https://scontent-frt3-2.cdninstagram.com/vp/257ba28fee0309abb07b6196bd5bb198/5C0CF96B/t51.2885-19/s150x150/30841686_1860612094237314_8456555885861273600_n.jpg',
+    mainImg: 'https://scontent-frt3-2.cdninstagram.com/vp/48d436f275e0bacf15b235ac6fd2cae0/5BF6F431/t51.2885-15/sh0.08/e35/p640x640/37771799_430459137361862_3462448775421755392_n.jpg',
+    comments: [
+      {
+        author: 'Kate',
+        text: 'Nice pic!'
+      },
+      {
+        author: 'Jim',
+        text: 'Lol!'
+      }
+    ]
+  },
+  {
+    id: '2',
+    name: 'Nina',
+    location: 'Kiyv',
+    logoImg: 'https://scontent-frt3-2.cdninstagram.com/vp/257ba28fee0309abb07b6196bd5bb198/5C0CF96B/t51.2885-19/s150x150/30841686_1860612094237314_8456555885861273600_n.jpg',
+    mainImg: 'https://scontent-frt3-2.cdninstagram.com/vp/48d436f275e0bacf15b235ac6fd2cae0/5BF6F431/t51.2885-15/sh0.08/e35/p640x640/37771799_430459137361862_3462448775421755392_n.jpg',
+    comments: [
+      {
+        author: 'Kate',
+        text: 'Nice pic!'
+      },
+      {
+        author: 'Jim',
+        text: 'Lol!'
+      }
+    ]
+  },
+]
+
 const typeDefs = gql`
   type Post {
+    id: String,
     name: String,
     location: String,
     logoImg: String,
@@ -14,12 +52,12 @@ const typeDefs = gql`
   }
 
   type Comment {
-    name: String,
+    author: String,
     text: String
   }
 
   input CommentInput {
-    name: String,
+    author: String,
     text: String
   }
 
@@ -34,40 +72,13 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    posts: () => [{ 
-      name: 'Nina', 
-      location: 'Kiyv',
-      logoImg: 'https://scontent-frt3-2.cdninstagram.com/vp/257ba28fee0309abb07b6196bd5bb198/5C0CF96B/t51.2885-19/s150x150/30841686_1860612094237314_8456555885861273600_n.jpg',
-      mainImg: 'https://scontent-frt3-2.cdninstagram.com/vp/48d436f275e0bacf15b235ac6fd2cae0/5BF6F431/t51.2885-15/sh0.08/e35/p640x640/37771799_430459137361862_3462448775421755392_n.jpg',
-      comments: [
-        {
-          name: 'Kate',
-          text: 'Nice pic!'
-        },
-        {
-          name: 'Jim',
-          text: 'Lol!'
-        }
-      ]
-    }],
+    posts: () => POSTS,
   },
   Mutation: {
-    comment: () => [{ 
-      name: 'Nina', 
-      location: 'Kiyv',
-      logoImg: 'https://scontent-frt3-2.cdninstagram.com/vp/257ba28fee0309abb07b6196bd5bb198/5C0CF96B/t51.2885-19/s150x150/30841686_1860612094237314_8456555885861273600_n.jpg',
-      mainImg: 'https://scontent-frt3-2.cdninstagram.com/vp/48d436f275e0bacf15b235ac6fd2cae0/5BF6F431/t51.2885-15/sh0.08/e35/p640x640/37771799_430459137361862_3462448775421755392_n.jpg',
-      comments: [
-        {
-          name: 'Kate',
-          text: 'Nice pic!'
-        },
-        {
-          name: 'Jim',
-          text: 'Lol!'
-        }
-      ]
-    }],
+    createComment: (_, { input }) => ({
+      author: input.author,
+      text: input.text
+    }),
   },
 };
 

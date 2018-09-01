@@ -3,7 +3,6 @@ import { LOAD_POSTS, CREATE_COMMENT } from './actions';
 
 const initState = {
   posts: [],
-  comments: [],
   error: null
 };
 
@@ -27,9 +26,15 @@ export default handleActions({
   },
   [CREATE_COMMENT]: {
     next: (state, action) => {
+      const postId = action.payload.postId;
+      state.posts.map(post => {
+        if (post.id === postId) {
+          return post.comments.push(action.payload.comment);
+        }
+      });
       return {
         ...state,
-        comments: action.payload,
+        posts: [...state.posts],
         error: null
       }
     },

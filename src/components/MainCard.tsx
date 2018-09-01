@@ -18,7 +18,7 @@ const CardHead = styled.div`
   margin-bottom: 5px;
 `;
 
-const MainCard = ({ name, location, logoImg, mainImg, comments }) => {
+const MainCard = ({ id, name, location, logoImg, mainImg, comments }) => {
   return (
     <Card style={{ marginBottom: "20px"}}>
       <CardHead>
@@ -32,7 +32,7 @@ const MainCard = ({ name, location, logoImg, mainImg, comments }) => {
       </CardHead>
       <CardImg top width="100%" src={mainImg} alt="Card image cap" />
       <CardBody>
-        <Comments comments={comments} />
+        <Comments postId={id} comments={comments} />
       </CardBody>
     </Card>
   )

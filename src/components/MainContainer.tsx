@@ -11,12 +11,13 @@ import { fetchPosts } from '../features/posts/actions';
 const QUERY = gql`
   query Query {
     posts {
+      id,
       name,
       location,
       logoImg,
       mainImg,
       comments {
-        name,
+        author,
         text
       }
     }
@@ -43,7 +44,7 @@ class MainContainer extends React.Component<Props> {
       <Row>
         <Col sm="8">
           {posts ?
-            posts.map((post, i) => <MainCard key={i} {...post} />) :
+            posts.map((post) => <MainCard key={post.id} {...post} />) :
             null
           }
         </Col>
