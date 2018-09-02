@@ -15,14 +15,14 @@ export const {
 export const fetchPosts = (query) =>
   dispatch =>
     api
-      .fetchPosts(query)
+      .graphqlRequest(query)
       .then(({ data }) => dispatch(loadPosts(data.posts)))
       .catch(err => dispatch(loadPosts(err)));
 
 export const addComment = (values, postId) =>
   dispatch =>
     api
-      .createComment(values)
+      .graphqlRequest(values)
       .then(({ data }) => dispatch(createComment({ 
         comment: data.createComment, 
         postId 

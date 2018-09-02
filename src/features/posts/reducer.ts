@@ -27,6 +27,7 @@ export default handleActions({
   [CREATE_COMMENT]: {
     next: (state, action) => {
       const postId = action.payload.postId;
+      console.log(action.payload)
       state.posts.map(post => {
         if (post.id === postId) {
           return post.comments.push(action.payload.comment);

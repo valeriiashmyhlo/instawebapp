@@ -6,9 +6,10 @@ import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'r
 import gql from 'graphql-tag';
 import { addComment } from '../../features/posts/actions';
 
-const QUERY = ({ author, text }) => gql`
+const QUERY = ({ postId, author, text }) => gql`
   mutation {
     createComment(input: {
+      postId: "${postId}"
       author: "${author}"
       text: "${text}"
     }) {
@@ -46,7 +47,7 @@ const InputField = ({
 
 class AddCommentForm extends React.Component<Props> {
   submit(values) {
-    const query = QUERY({ author: "Alex", text: values.comment });
+    const query = QUERY({ postId: this.props.postId, author: "Alex", text: values.comment });
     return this.props.addComment(query, this.props.postId)
     .then(this.props.reset);
   }
@@ -67,6 +68,4 @@ class AddCommentForm extends React.Component<Props> {
 
 // AddCommentForm.propTypes = {};
 
-export default connect(null, { addComment })(reduxForm({
-  form: "AddCommentForm"
-}, )(AddCommentForm));
+export default connect(null, { addComment })(reduxForm()(AddCommentForm));

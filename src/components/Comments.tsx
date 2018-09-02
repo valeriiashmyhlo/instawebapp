@@ -24,7 +24,7 @@ const Comments = ({ postId, comments }) => {
   return (
     <div>
       <div style={{ marginBottom: "20px" }}>
-        {comments ? comments.map(({ author, text }, i) => (
+        {comments ? comments.map(({ postId, author, text }, i) => (
           <Comment key={i}>
             <Name href="#">{author}</Name>
             <Text>{text}</Text>
