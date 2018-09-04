@@ -24,7 +24,8 @@ exports.resolvers = {
       const users = await resUsers.json();
       const { firstName, lastName, email, password } = input;
       const resUser = await postUser({ firstName, lastName, email, password });
-      const user = await user.json();
+      const user = await resUser.json();
+      delete user.password;
       return user;
     }
   },

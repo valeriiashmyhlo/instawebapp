@@ -44,7 +44,6 @@ const QUERY = ({ firstName, lastName, email, password }) => gql`
       firstName
       lastName
       email
-      password
     }
   } 
 `;

@@ -5,7 +5,14 @@
       "lastName": "Hanks",
       "email": "hanks@gmail.com",
       "password": "123456",
-      "id": 11
+      "id": 1
+    },
+    {
+      "firstName": "Brad",
+      "lastName": "Pitt",
+      "email": "pitt@gmail.com",
+      "password": "11111111",
+      "id": 2
     }
   ],
   "posts": [
