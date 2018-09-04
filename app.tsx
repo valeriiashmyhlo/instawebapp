@@ -1,23 +1,24 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import { Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './src/components/Header';
 import MainContainer from './src/components/MainContainer';
-import store from './store';
 import './styles.css';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import EntryPage from './src/components/EntryPage';
 
-// const networkInterface = createNetworkInterface({
-//   uri: 'http://localhost:3001/graphql',
-// });
+class App extends React.Component {
+  render() {
+    return (
+      <Container>
+        {/* <Header /> */}
+        {/* <MainContainer /> */}
+        {/* <EntryPage /> */}
+        {this.props.children}
+      </Container>
+    )
+  }
+};
 
-ReactDOM.render(
-  <Provider store={store} >
-    <Container>
-      <Header />
-      <MainContainer />
-    </Container>
-  </Provider>,
-  document.getElementById("root")
-);
+export default App;

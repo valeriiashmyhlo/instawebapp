@@ -1,4 +1,13 @@
 {
+  "users": [
+    {
+      "firstName": "Tom",
+      "lastName": "Hanks",
+      "email": "hanks@gmail.com",
+      "password": "123456",
+      "id": 11
+    }
+  ],
   "posts": [
     {
       "id": "5",

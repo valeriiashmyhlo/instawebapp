@@ -1,6 +1,13 @@
 const { gql } = require('apollo-server-express');
 
 exports.typeDefs = gql`
+  type User {
+    id: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String
+  }
   type Post {
     id: String,
     name: String,
@@ -9,7 +16,6 @@ exports.typeDefs = gql`
     mainImg: String,
     comments: [Comment]
   }
-
   type Comment {
     author: String,
     text: String
@@ -20,6 +26,12 @@ exports.typeDefs = gql`
     author: String,
     text: String
   }
+  input CreateUserInput {
+    firstName: String,
+    lastName: String,
+    email: String,
+    password: String
+  }
 
   type Query {
     posts: [Post]
@@ -27,5 +39,6 @@ exports.typeDefs = gql`
 
   type Mutation {
     createComment(input: CommentInput): Comment
+    createUser(input: CreateUserInput): User
   }
 `;

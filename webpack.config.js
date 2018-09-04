@@ -3,7 +3,8 @@ var path = require("path");
 var config = {
   mode: 'development',
   devtool: "inline-source-map",
-  entry: ["./app.tsx"],
+  entry: ["./router.tsx"],
+  // entry: ["./app.tsx"],
   output: {
     path: path.resolve(__dirname, "build"),
     filename: "bundle.js"
@@ -24,7 +25,8 @@ var config = {
         use: ['style-loader','css-loader', 'sass-loader'] 
       },
     ]
-  }
+  },
+  devServer: { historyApiFallback: true }
 };
 
 module.exports = config;

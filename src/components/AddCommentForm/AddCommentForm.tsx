@@ -2,9 +2,10 @@ import * as React from 'react';
 // import propTypes from 'prop-types';
 import { reduxForm, Field } from "redux-form";
 import { connect } from 'react-redux';
-import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import { Form } from 'reactstrap';
 import gql from 'graphql-tag';
 import { addComment } from '../../features/posts/actions';
+import InputField from '../InputField/InputField';
 
 const QUERY = ({ postId, author, text }) => gql`
   mutation {
@@ -25,25 +26,6 @@ type Props = {
   reset: () => {}, 
   postId: string
 }
-
-const InputField = ({
-  input,
-  type,
-  name,
-  placeholder,
-  meta: { touched, error }
-}) => (
-    <div>
-      <Input
-        {...input}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        invalid={!!(touched && error)}
-      />
-      <FormFeedback>{error}</FormFeedback>
-    </div>
-  );
 
 class AddCommentForm extends React.Component<Props> {
   submit(values) {
